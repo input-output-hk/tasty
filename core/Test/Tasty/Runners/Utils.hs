@@ -1,5 +1,7 @@
 {-# LANGUAGE BangPatterns #-}
 
+{-# OPTIONS_GHC -Wno-unused-imports #-}
+
 -- | Note: this module is re-exported as a whole from "Test.Tasty.Runners"
 module Test.Tasty.Runners.Utils where
 

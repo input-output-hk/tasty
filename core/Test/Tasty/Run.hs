@@ -52,6 +52,8 @@ import Test.Tasty.Runners.Reducers
 import Test.Tasty.Runners.Utils (timed, forceElements)
 import Test.Tasty.Providers.ConsoleFormat (noResultDetails)
 
+import qualified System.IO as IO
+
 -- | Current status of a test.
 --
 -- @since 0.1
@@ -605,6 +607,7 @@ launchTestTree
 launchTestTree opts tree k0 = do
   (testActions, fins) <- createTestActions opts tree
   let NumThreads numTheads = lookupOption opts
+  IO.hPutStrLn IO.stderr $ "==> num threads: " <> show numTheads
   (t,k1) <- timed $ do
      abortTests <- runInParallel numTheads (testAction <$> testActions)
      (do let smap = IntMap.fromDistinctAscList $ zip [0..] (testStatus <$> testActions)
